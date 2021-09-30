@@ -2,19 +2,14 @@ import React from 'react';
 import foto from './images/image-jeremy.png';
 import './App.css';
 import Tempos from './Tempos';
+import cn from 'clsx';
 
 const App = () => {
   const [tempo, setTempo] = React.useState(null);
+  const [active, setActive] = React.useState(null);
 
-  function handleClick(event) {
-    setTempo(event.target.innerText);
-
-    const link = document.querySelectorAll('a');
-    if (link.hasOwnProperty('active')) {
-      link.classList.remove('active');
-    }
-    console.log(link);
-    event.target.classList.add('active');
+  function handleClick(tempo) {
+    setTempo(tempo);
   }
 
   return (
@@ -32,13 +27,25 @@ const App = () => {
             </div>
           </div>
           <div className="links">
-            <a className="link" href="#" onClick={handleClick}>
+            <a
+              className={cn('link', { active: tempo === 'daily' })}
+              href="#"
+              onClick={() => handleClick('daily')}
+            >
               daily
             </a>
-            <a className="link" href="#" onClick={handleClick}>
+            <a
+              className={cn('link', { active: tempo === 'weekly' })}
+              href="#"
+              onClick={() => handleClick('weekly')}
+            >
               weekly
             </a>
-            <a className="link" href="#" onClick={handleClick}>
+            <a
+              className={cn('link', { active: tempo === 'monthly' })}
+              href="#"
+              onClick={() => handleClick('monthly')}
+            >
               monthly
             </a>
           </div>
